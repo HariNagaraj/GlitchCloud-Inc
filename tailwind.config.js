@@ -7,73 +7,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#141218',
+        background: '#050505',
         surface: {
-          DEFAULT: '#141218',
-          dim: '#141218',
-          bright: '#3b383e',
-          container: '#211f24',
-          'container-low': '#1d1b20',
-          'container-lowest': '#0f0d13',
-          'container-high': '#2b292f',
-          'container-highest': '#36343a',
-          variant: '#36343a',
+          DEFAULT: '#111116',
+          hover: '#1A1A24',
+          border: '#2A2A35'
         },
         primary: {
-          DEFAULT: '#cfbcff',
-          container: '#6750a4',
-          fixed: '#e9ddff',
-          'fixed-dim': '#cfbcff',
+          DEFAULT: '#BB86FC',
+          dim: 'rgba(187, 134, 252, 0.1)',
         },
-        'on-primary': {
-          DEFAULT: '#381e72',
-          container: '#e0d2ff',
-          fixed: '#22005d',
-          'fixed-variant': '#4f378a',
+        neutral: {
+          DEFAULT: '#94A3B8',
+          dark: '#475569',
         },
-        secondary: {
-          DEFAULT: '#cdc0e9',
-          container: '#4d4465',
-        },
-        'on-secondary': {
-          DEFAULT: '#342b4b',
-          container: '#bfb2da',
-        },
-        'on-surface': {
-          DEFAULT: '#e6e0e9',
-          variant: '#cbc4d2',
-        },
-        outline: {
-          DEFAULT: '#948e9c',
-          variant: '#494551',
-        },
-        error: {
-          DEFAULT: '#ffb4ab',
-          container: '#93000a',
-        },
-        'on-error': {
-          DEFAULT: '#690005',
-          container: '#ffdad6',
-        },
-        inverse: {
-          surface: '#e6e0e9',
-          'on-surface': '#322f35',
-          primary: '#6750a4',
+        warning: {
+          DEFAULT: '#F59E0B',
+          dim: 'rgba(245, 158, 11, 0.1)',
         }
       },
       fontFamily: {
         sans: ['Urbanist', 'sans-serif'],
       },
       boxShadow: {
-        'glass-inner': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
-        'neon-primary': '0 0 20px rgba(207, 188, 255, 0.4)',
-        'neon-secondary': '0 0 20px rgba(205, 192, 233, 0.4)',
+        'neon-purple': '0 0 15px rgba(187, 134, 252, 0.3)',
+        'neon-purple-strong': '0 0 20px rgba(187, 134, 252, 0.5)',
+        'neon-yellow': '0 0 20px rgba(245, 158, 11, 0.2)',
+        'inner-purple': 'inset 0 0 10px rgba(187, 134, 252, 0.1)',
       },
       letterSpacing: {
         'heading': '0.02em',
-      },
-      backdropBlur: {
-        'glass': '20px',
       }
     },
   },

@@ -6,24 +6,12 @@
 
 @layer base {
   body {
-    @apply bg-background text-on-surface font-sans antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply tracking-heading font-semibold;
+    @apply bg-background text-white font-sans antialiased min-h-screen;
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-[#0f0f1a]/80 backdrop-blur-glass shadow-glass-inner border border-white/10;
-  }
-
-  .glow-primary {
-    @apply shadow-neon-primary;
-  }
-
-  .glow-secondary {
-    @apply shadow-neon-secondary;
+    @apply bg-surface rounded-2xl border border-surface-border;
   }
 }
