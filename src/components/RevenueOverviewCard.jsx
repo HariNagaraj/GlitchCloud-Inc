@@ -9,7 +9,7 @@ export function RevenueOverviewCard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-7 flex flex-col justify-between h-[220px] overflow-hidden border border-t-white/10 border-l-white/10 shadow-[0_0_40px_rgba(187,134,252,0.12),0_10px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)]"
+      className="bg-[#0a0a0f]/50 border border-white/5 rounded-[32px] p-7 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col justify-between h-[220px]"
     >
       <div className="flex items-start justify-between relative z-10">
         <div>

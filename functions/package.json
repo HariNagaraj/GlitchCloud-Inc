@@ -1,0 +1,23 @@
+{
+  "name": "glitchcloud-backend-functions",
+  "version": "1.0.0",
+  "description": "GlitchCloud Cloud Functions & API Microservice",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "node index.js",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.3.2"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "private": true
+}

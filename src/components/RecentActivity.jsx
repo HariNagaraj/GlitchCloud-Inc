@@ -24,7 +24,7 @@ export function RecentActivity() {
   ];
 
   return (
-    <div className="relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-7 border border-t-white/10 border-l-white/10 shadow-[0_0_30px_rgba(187,134,252,0.05),0_10px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] flex flex-col h-full">
+    <div className="bg-[#0a0a0f]/50 border border-white/5 rounded-[32px] p-6 sm:p-7 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col h-full">
       <div className="flex items-center justify-between mb-7 relative z-10">
         <h2 className="text-[17px] font-bold tracking-wide text-white">Recent Activity</h2>
         <button className="text-primary text-[10px] font-bold uppercase tracking-widest hover:text-white transition-colors">

@@ -1,10 +1,12 @@
 import { useTeamStore } from '../../store/useTeamStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, File, Lock } from 'lucide-react';
+import { ProfilePanel } from './ProfilePanel';
 
 export function SidePanels() {
-  const { currentUser, activeDrawer, setOpenDrawer } = useTeamStore();
+  const { currentUser, activeDrawer, setOpenDrawer, activeProfileMember, chats, activeChatId } = useTeamStore();
   const isExecutive = currentUser.roleTier === 'Executive';
+  const activeChat = chats.find(c => c.id === activeChatId);
 
   // Mock data
   const teamMembers = [
@@ -19,20 +21,27 @@ export function SidePanels() {
     { id: 3, name: 'Dashboard_V2_Mocks.fig', type: 'FIG', size: '15.6 MB', restricted: false },
   ];
 
+  const getDrawerTitle = () => {
+    if (activeDrawer === 'Details') return 'Team Details';
+    if (activeDrawer === 'Files') return 'Shared Files';
+    if (activeDrawer === 'Profile') return 'Member Profile';
+    return '';
+  };
+
   return (
     <AnimatePresence>
       {activeDrawer && (
         <motion.div
-          initial={{ x: 320 }}
+          initial={{ x: 350 }}
           animate={{ x: 0 }}
-          exit={{ x: 320 }}
+          exit={{ x: 350 }}
           transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
           className="absolute right-0 top-16 bottom-0 w-80 bg-[#0a0a0f] border-l border-white/5 shadow-2xl z-30 flex flex-col"
         >
           {/* Drawer Header */}
-          <div className="flex items-center justify-between p-4 border-b border-white/5">
-            <h3 className="font-semibold text-white">
-              {activeDrawer === 'Details' ? 'Team Details' : 'Shared Files'}
+          <div className="flex items-center justify-between p-4 border-b border-white/5 bg-[#0a0a0f]/50 backdrop-blur-xl">
+            <h3 className="font-semibold text-white tracking-wide">
+              {getDrawerTitle()}
             </h3>
             <button 
               onClick={() => setOpenDrawer(null)}
@@ -42,8 +51,13 @@ export function SidePanels() {
             </button>
           </div>
 
-          {/* Drawer Content - Details */}
-          {activeDrawer === 'Details' && (
+          {/* Drawer Content - Profile */}
+          {activeDrawer === 'Profile' && (
+            <ProfilePanel member={activeProfileMember} onClose={() => setOpenDrawer(null)} />
+          )}
+
+          {/* Drawer Content - Details (Team Channels only) */}
+          {activeDrawer === 'Details' && activeChat?.type !== 'direct' && (
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {teamMembers.map(member => (
                 <div key={member.id} className="bg-[#1a1a24]/40 border border-white/5 rounded-xl p-3">

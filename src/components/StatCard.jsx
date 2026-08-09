@@ -1,71 +1,67 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export function StatCard({ title, value, decimal, change, changeType, icon: Icon, variant = 'default' }) {
-  // Variants: primary (purple), default (grey), warning (yellow)
-  
-  const styles = {
-    primary: {
-      card: 'shadow-[0_0_40px_rgba(187,134,252,0.12)] border-primary/20',
-      iconContainer: 'bg-primary/10 text-primary border border-primary/20 shadow-[inset_0_1px_4px_rgba(187,134,252,0.2)]',
-      badge: 'bg-primary/10 text-primary border border-primary/20 shadow-[inset_0_1px_2px_rgba(187,134,252,0.2)]',
-      badgeText: change
-    },
-    default: {
-      card: 'border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.5)]',
-      iconContainer: 'bg-white/5 text-neutral border border-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)]',
-      badge: 'bg-white/5 text-neutral border border-white/10',
-      badgeText: change
-    },
-    warning: {
-      card: 'border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.5)]',
-      iconContainer: 'bg-warning/10 text-warning border border-warning/20 shadow-[inset_0_1px_4px_rgba(245,158,11,0.2)]',
-      badge: 'bg-transparent text-warning text-sm font-semibold flex items-center gap-2',
-      badgeText: (
-        <>
-          <span className="w-2 h-2 rounded-full bg-warning shadow-neon-yellow"></span>
-          {change}
-        </>
-      ),
-      leftGlow: true
-    }
-  };
-
-  const currentStyle = styles[variant];
-
+/**
+ * Premium StatCard - Unified across the entire platform.
+ * Follows the high-fidelity Dashboard design system.
+ */
+export const StatCard = React.memo(function StatCard({ 
+  title, 
+  value, 
+  subValue, 
+  icon: Icon, 
+  isFeatured = false,
+  decimal = "",
+  change = "",
+  isPositive = null
+}) {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-7 flex flex-col justify-between h-[220px] overflow-hidden border border-t-white/10 border-l-white/10 ${currentStyle.card}`}
+    <motion.div
+      variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+      className={`relative p-7 rounded-[32px] border border-white/5 backdrop-blur-xl flex flex-col h-auto min-h-[160px] overflow-hidden group transition-all hover:scale-[1.02] ${isFeatured ? 'bg-gradient-to-br from-[#7C3AED] to-[#5B21B6] border-primary/20 shadow-[0_20px_50px_rgba(124,58,237,0.2)]' : 'bg-[#0a0a0f]/50'}`}
     >
-      {currentStyle.leftGlow && (
-        <div className="absolute left-0 top-6 bottom-6 w-1 bg-warning shadow-[0_0_20px_4px_rgba(245,158,11,0.5)] rounded-r-full" />
+      {!isFeatured && (
+        <div className="absolute -top-12 -right-12 w-24 h-24 bg-white/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all" />
       )}
       
-      <div className="flex items-start justify-between relative z-10">
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${currentStyle.iconContainer}`}>
-          <Icon className="w-5 h-5" />
+      <div className="flex justify-between items-start mb-4">
+        <div className={`p-3 rounded-2xl ${isFeatured ? 'bg-white/20' : 'bg-white/5 border border-white/10'}`}>
+          <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${isFeatured ? 'text-white' : 'text-primary'}`} />
         </div>
         
-        {variant === 'warning' ? (
-          <div className={currentStyle.badge}>
-            {currentStyle.badgeText}
-          </div>
-        ) : (
-          <div className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide ${currentStyle.badge}`}>
-            {currentStyle.badgeText}
+        {isFeatured && (
+          <div className="text-[9px] sm:text-[10px] font-black uppercase text-white/40 tracking-[0.3em] bg-white/5 px-3 py-1 rounded-full border border-white/5">Featured</div>
+        )}
+        
+        {!isFeatured && change && (
+          <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
+            isPositive === true ? 'bg-green-500/10 text-green-400 border-green-500/20' : 
+            isPositive === false ? 'bg-red-500/10 text-red-400 border-red-500/20' : 
+            'bg-white/5 text-neutral/60 border-white/10'
+          }`}>
+            {isPositive === true && '↑ '}
+            {isPositive === false && '↓ '}
+            {change}
           </div>
         )}
       </div>
-      
-      <div className="relative z-10">
-        <h3 className="text-neutral text-[15px] font-medium mb-1.5">{title}</h3>
-        <div className="text-[38px] font-bold text-white flex items-baseline gap-1 tracking-tight">
+
+      <div className="flex-1 flex flex-col justify-center">
+        <div className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] mb-1.5 ${isFeatured ? 'text-white/60' : 'text-neutral'}`}>
+          {title}
+        </div>
+        <div className="text-fluid-2xl sm:text-fluid-3xl font-black tracking-tight leading-none text-white flex items-baseline gap-0.5">
           {value}
-          <span className="text-neutral dark text-[22px] font-medium">{decimal}</span>
+          {decimal && <span className="text-[0.5em] opacity-40 font-bold">{decimal}</span>}
         </div>
       </div>
+
+      {subValue && (
+        <div className={`flex items-center gap-2 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mt-4 ${isFeatured ? 'text-white/40' : 'text-white/20'}`}>
+          <div className={`w-1.5 h-1.5 rounded-full ${isFeatured ? 'bg-white' : 'bg-primary shadow-[0_0_8px_rgba(124,58,237,0.5)]'}`} />
+          {subValue}
+        </div>
+      )}
     </motion.div>
   );
-}
+});

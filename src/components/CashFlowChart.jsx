@@ -12,7 +12,7 @@ export function CashFlowChart() {
   ];
 
   return (
-    <div className="relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-8 border border-t-white/10 border-l-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] h-[400px] flex flex-col overflow-hidden">
+    <div className="bg-[#0a0a0f]/50 border border-white/5 rounded-[32px] p-6 sm:p-8 backdrop-blur-xl shadow-2xl h-[400px] flex flex-col overflow-hidden">
       <div className="flex items-center justify-between mb-8 relative z-10">
         <h2 className="text-xl font-bold tracking-wide text-white">Cash Flow Overview</h2>
         <button className="text-neutral hover:text-white transition-colors">

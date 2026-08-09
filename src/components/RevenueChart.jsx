@@ -5,7 +5,7 @@ export function RevenueChart() {
   const viewBoxHeight = 550;
 
   return (
-    <div className="relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-8 border border-t-white/10 border-l-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col h-full min-h-[480px] w-full">
+    <div className="bg-[#0a0a0f]/50 border border-white/5 rounded-[32px] p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col h-full min-h-[480px] w-full">
       <div className="flex items-center justify-between mb-2 relative z-20">
         <h3 className="text-2xl font-semibold text-white tracking-wide">Revenue Trajectory</h3>
         <div className="flex items-center gap-5 text-[13px] font-semibold tracking-wide">

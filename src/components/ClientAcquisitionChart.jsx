@@ -10,7 +10,7 @@ export function ClientAcquisitionChart() {
   ];
 
   return (
-    <div className="relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-8 border border-t-white/10 border-l-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col h-full min-h-[300px]">
+    <div className="bg-[#0a0a0f]/50 border border-white/5 rounded-[32px] p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col h-full min-h-[300px]">
       <h3 className="text-[22px] font-semibold text-white tracking-wide mb-6 relative z-10">Client Acquisition</h3>
       
       <div className="flex-1 flex flex-col justify-end relative z-10 mt-auto">

@@ -5,17 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "powershell -Command \"if (Test-Path dist) { Remove-Item -Path dist -Recurse -Force }\"",
     "build": "vite build",
+    "deploy": "node scripts/deploy.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "autoprefixer": "^10.5.0",
+    "axios": "^1.15.2",
+    "firebase": "^12.17.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.14.0",
     "postcss": "^8.5.12",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "recharts": "^3.8.1",
+    "socket.io-client": "^4.8.3",
     "tailwindcss": "^3.4.17",
     "zustand": "^5.0.12"
   },

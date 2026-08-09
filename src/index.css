@@ -5,13 +5,100 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-background text-white font-sans antialiased min-h-screen;
+  :root {
+    /* Color Tokens (Dynamic) */
+    --color-primary: #BB86FC;
+    --color-primary-dim: rgba(187, 134, 252, 0.1);
+    --color-primary-glow: rgba(187, 134, 252, 0.3);
+
+    /* Fluid Typography Tokens */
+    --text-xs: clamp(0.7rem, 0.64rem + 0.3vw, 0.85rem);
+    --text-sm: clamp(0.8rem, 0.76rem + 0.4vw, 0.95rem);
+    --text-base: clamp(0.9rem, 0.86rem + 0.5vw, 1.1rem);
+    --text-lg: clamp(1rem, 0.94rem + 0.6vw, 1.25rem);
+    --text-xl: clamp(1.15rem, 1.07rem + 0.8vw, 1.5rem);
+    --text-2xl: clamp(1.4rem, 1.28rem + 1.2vw, 1.875rem);
+    --text-3xl: clamp(1.75rem, 1.6rem + 1.8vw, 2.5rem);
+    --text-4xl: clamp(2.25rem, 2.05rem + 2.5vw, 3.5rem);
+    
+    /* Layout Tokens */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
   }
+
+  body {
+    @apply bg-[#030305] text-white font-sans antialiased min-h-screen;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    padding-bottom: var(--safe-bottom);
+  }
+
+  ::selection {
+    background-color: var(--color-primary-glow);
+    color: white;
+  }
+}
+
+/* Dark Glassmorphic Date Picker Styling */
+input[type="date"], input[type="datetime-local"] {
+  color-scheme: dark;
+  background-color: rgba(255, 255, 255, 0.03);
+  accent-color: #7C3AED;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(1) saturate(5) hue-rotate(240deg);
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 4px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: rgba(124, 58, 237, 0.2);
+}
+
+@layer utilities {
+  .text-fluid-xs { font-size: var(--text-xs); }
+  .text-fluid-sm { font-size: var(--text-sm); }
+  .text-fluid-base { font-size: var(--text-base); }
+  .text-fluid-lg { font-size: var(--text-lg); }
+  .text-fluid-xl { font-size: var(--text-xl); }
+  .text-fluid-2xl { font-size: var(--text-2xl); }
+  .text-fluid-3xl { font-size: var(--text-3xl); }
+  .text-fluid-4xl { font-size: var(--text-4xl); }
+
+  .pb-safe { padding-bottom: var(--safe-bottom); }
+  .pt-safe { padding-top: var(--safe-top); }
+  .px-safe { padding-left: var(--safe-left); padding-right: var(--safe-right); }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-surface rounded-2xl border border-surface-border;
+    @apply bg-[#0a0a0f]/50 backdrop-blur-xl rounded-[32px] border border-white/5;
   }
+}
+
+/* Completely Remove Scrollbar Visuals (Keep Functionality) */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Firefox Support */
+* {
+  scrollbar-width: none !important;
+}
+
+/* IE/Edge Support */
+* {
+  -ms-overflow-style: none !important;
 }

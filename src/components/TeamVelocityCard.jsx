@@ -9,7 +9,7 @@ export function TeamVelocityCard() {
   ];
 
   return (
-    <div className="relative bg-[#12121A]/60 backdrop-blur-2xl rounded-[32px] p-8 border border-t-white/10 border-l-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col h-[280px]">
+    <div className="bg-[#0a0a0f]/50 border border-white/5 rounded-[32px] p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
       <div className="flex items-center justify-between mb-8 relative z-10">
         <h3 className="text-2xl font-semibold text-white tracking-wide">Team Velocity</h3>
         <button className="text-neutral hover:text-white transition-colors">

@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function getUserRole() {
+      return getUserData().role;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (getUserRole() == 'admin' || request.auth.token.role == 'admin');
+    }
+
+    function isHR() {
+      return isAuthenticated() && getUserRole() == 'hr';
+    }
+
+    // === USERS COLLECTION ===
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || isHR() || (isAuthenticated() && request.auth.uid == userId);
+    }
+
+    // === PRESENCE COLLECTION ===
+    match /presence/{userId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // === CHANNEL MESSAGES ===
+    match /channels/{channelId}/messages/{messageId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // === DIRECT MESSAGES ===
+    match /direct_messages/{roomId}/messages/{messageId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // === PROJECTS COLLECTION ===
+    match /projects/{projectId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // === WORKLOGS COLLECTION ===
+    match /worklogs/{taskId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // === FINANCIALS COLLECTION ===
+    match /financials/{recordId} {
+      allow read, write: if isAuthenticated();
+    }
+  }
+}
