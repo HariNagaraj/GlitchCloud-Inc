@@ -1,14 +1,18 @@
 name: TestDriver AI E2E Tests
 
 on:
-  issues:
-    types: [opened, edited]
   issue_comment:
     types: [created]
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
 jobs:
   testdriver:
-    if: contains(github.event.issue.body, '@testdriverai') || contains(github.event.comment.body, '@testdriverai')
+    if: contains(github.event.comment.body, '@testdriverai')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -17,5 +21,4 @@ jobs:
       - name: Run TestDriver AI
         uses: testdriverai/action@main
         with:
-          key: ${{ secrets.TESTDRIVER_API_KEY }}
-          pr: true
+          api-key: ${{ secrets.TESTDRIVER_API_KEY }}
